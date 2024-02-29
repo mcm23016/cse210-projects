@@ -15,13 +15,23 @@ class Program
         if (gradePercentage >= 90){
             Console.WriteLine("Your grade is an A");
         } else if (gradePercentage >= 80){
-            Console.WriteLine("Your grade is an B");
+            Console.WriteLine("Your grade is a B");
         } else if (gradePercentage >= 70){
-            Console.WriteLine("Your grade is an C");
+            Console.WriteLine("Your grade is a C");
         } else if (gradePercentage >= 60){
-            Console.WriteLine("Your grade is an D");
+            Console.WriteLine("Your grade is a D");
         } else {
             Console.WriteLine("Your grade is an F");
+        }
+
+        // Decides if the user passed and prints out a message
+        if (gradePercentage >= 70)
+        {
+            Console.WriteLine("Congratulations! You passed!");
+        }
+        else
+        {
+            Console.WriteLine("You did not pass, but failure is not the end. Try again!");
         }
     }
 }
