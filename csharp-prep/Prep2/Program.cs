@@ -11,18 +11,24 @@ class Program
         // Converts grade percentage string to an int
         int gradePercentage = int.Parse(userInput);
 
-        // Decides the letter grade to give to the student
+
+        // Decides the letter grade to give to the student and prints it out
+        string letterGrade = "";
+
         if (gradePercentage >= 90){
-            Console.WriteLine("Your grade is an A");
+            letterGrade = "A";
         } else if (gradePercentage >= 80){
-            Console.WriteLine("Your grade is a B");
+            letterGrade = "B";
         } else if (gradePercentage >= 70){
-            Console.WriteLine("Your grade is a C");
+            letterGrade = "C";
         } else if (gradePercentage >= 60){
-            Console.WriteLine("Your grade is a D");
+            letterGrade = "D";
         } else {
-            Console.WriteLine("Your grade is an F");
+            letterGrade = "F";
         }
+
+        Console.WriteLine($"Your grade is a(n) {letterGrade}");
+
 
         // Decides if the user passed and prints out a message
         if (gradePercentage >= 70)
