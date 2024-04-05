@@ -2,6 +2,10 @@
 Ian McMaster
 CSE  210
 
+Extras:
+1. Added a rating to each day so the user can rate their overal day.
+2. Added a reminder to save if the user tries to quit
+
 Resources used:
 https://learn.microsoft.com/en-us/dotnet/csharp/how-to/parse-strings-using-split
 https://learn.microsoft.com/en-us/dotnet/csharp/how-to/concatenate-multiple-strings
