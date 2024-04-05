@@ -1,34 +1,42 @@
 public class Journal
 {
     // Class States
-    public List<Entry> _entries = new List<Entry>();
+    private List<Entry> _imEntries = new List<Entry>();
 
     // Class Methods
-    public string toString()
+    public string ImToString()
     {
-        /*
-        Returns a string[] of all the string entries in journal
-            Parameters: None
-            Returns: string[]
-        */
+        // Creates string to hold entries
         string journalString = "";
-        return journalString;
-    }
-    public string toCSV()
-    {
-        /*
-        Returns a string of all the string entries in journal
-            Parameters: None
-            Returns: string
-        */
-        string journalString = "";
-        return journalString;
-    }
-    public void fromCSV(/*temp variable array of strings*/ string[] lines)
-    {
-        foreach (string line in lines)
+
+        // Adds each entry to the string
+        foreach(Entry entry in _imEntries)
         {
-            //Entry.fromCSV(line)
+            journalString = journalString + entry.ImToString() + "\n"; 
         }
+        
+        // Returns final string
+        return journalString;
+
+    }
+    public string ImToCSV()
+    {
+        // Creates string to hold entries
+        string journalString = "";
+
+        // Adds each entry to the string
+        foreach(Entry entry in _imEntries)
+        {
+            journalString = journalString + entry.ImToCSV() + "\n"; 
+        }
+        
+        // Returns final string
+        return journalString;
+        
+    }
+
+    public void ImNewEntry(string date, string prompt, string response, string dailyRating)
+    {
+        _imEntries.Add(new Entry(date, prompt, response, dailyRating));
     }
 }

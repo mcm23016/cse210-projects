@@ -11,7 +11,7 @@ class Program
         imShapes.Add(new Square("Red", 5));
         imShapes.Add(new Rectangle("Green", 4, 5));
         imShapes.Add(new Circle("Blue", 1));
-
+        
         foreach (Shape imShape in imShapes)
         {
             Console.WriteLine(imShape.ImGetColor());

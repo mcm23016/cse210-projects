@@ -9,23 +9,36 @@ https://www.w3schools.com/cs/cs_switch.php
 */
 
 using System;
+using System.IO; 
+using System.Diagnostics.Contracts;
 
 class Program
 {
     static void Main(string[] args)
     {
-        /*
-        Entry entry1 = new Entry();
-        entry1._imDate = "DATE";
-        entry1._imPrompt = "PROMPT";
-        entry1._imResponse = "RESPONSE";
-        Console.WriteLine(entry1.toCSV());
-        */
+        Journal imJournal = new Journal();
+        // List<Entry> imEntries = new List<Entry>();
 
         string ImGetJournalPrompt()
         {
-            string imPrompt = "";
-            return imPrompt;
+            List<String> prompts = new List<String>();
+            prompts.Add("Who was the most interesting person I interacted with today?");
+            prompts.Add("What was the best part of my day?");
+            prompts.Add("How did I see the hand of the Lord in my life today?");
+            prompts.Add("What was the strongest emotion I felt today?");
+            prompts.Add("If I had one thing I could do over today, what would it be?");
+            prompts.Add("What did you feel grateful for today?");
+            prompts.Add("What was something I learned today?");
+            prompts.Add("Did you serve anyone today?");
+            prompts.Add("Did anyone serve you today?");
+            prompts.Add("You got this, use your brain to write something!");
+
+            // Generates a random number
+            Random randomGenerator = new Random();
+            int imRandomNumber = randomGenerator.Next(0, prompts.Count-1);
+
+            // Returns a random prompt
+            return prompts.ElementAt(imRandomNumber);
         }
 
         void ImWriteEntry()
@@ -34,30 +47,68 @@ class Program
             string imPrompt = ImGetJournalPrompt();
             Console.WriteLine(imPrompt);
             
+            // Gets the current date and shortens it
+            DateTime imCurrentDate = DateTime.Now;
+            string imDate = imCurrentDate.ToShortDateString();
+
             //Gives the user a carrot to write response and reads the response.
             Console.Write("> ");
             string imResponse = Console.ReadLine();
 
-            
+            // Asks the user to rate the day
+            Console.Write("How would you overal rate today (1-10): ");
+            string _imDailyRating = Console.ReadLine();
+
+
+            // Creates new entry
+            imJournal.ImNewEntry(imDate, imPrompt, imResponse, _imDailyRating);
         }
 
 
         void ImDisplayFile()
         {
-            // Code here
+            string imJournalString = imJournal.ImToString();
+            Console.WriteLine(imJournalString);
         }
 
 
         void ImLoadFile()
         {
-            Console.Write("Enter a file name to save the journal to: ");
-            Console.ReadLine();
+            Console.Write("Enter a file name to load the journal from: ");
+            string imFileName = Console.ReadLine();
+
+            string[] lines = System.IO.File.ReadAllLines(imFileName);
+
+            foreach (string line in lines)
+            {
+                if (line != "")
+                {
+                     string[] parts = line.Split("~~");
+
+                    string date = parts[0];
+                    string prompt= parts[1];
+                    string response = parts[2];
+                    string dailyRating = parts[3];
+
+                    imJournal.ImNewEntry(date, prompt, response, dailyRating);
+
+                }
+            }
+
         }
 
 
         void ImSaveFile()
         {
-            // Code here 
+            Console.Write("Enter a file name to save the journal to: ");
+            string imFileName = Console.ReadLine();
+            string imJournalCSV = imJournal.ImToCSV();
+
+            using (StreamWriter outputFile = new StreamWriter(imFileName))
+            {
+                outputFile.WriteLine(imJournalCSV);
+            }
+
         }
 
         void ImMainMenu(){
@@ -82,6 +133,9 @@ class Program
                 // Reads the users choice
                 imUserChoice = int.Parse(Console.ReadLine());
 
+                // Blank line to be more readable
+                Console.WriteLine();
+
                 // Selects funtion to run based off of user input
                 switch(imUserChoice) 
                 {
@@ -98,7 +152,14 @@ class Program
                         ImSaveFile();
                         break;
                     case 5:
-                        // code block
+                        Console.Write("Did you remember to save your journal?\nAre you sure you want to quit? (y or n) ");
+                        string response = Console.ReadLine();
+                        if (response == "n")
+                        {
+                            imUserChoice = 0;
+                            break;
+                        }
+                        // Else does nothing and exits while loop
                         break;
                     default:
                         Console.WriteLine("Error: Enter a number 1-5");
