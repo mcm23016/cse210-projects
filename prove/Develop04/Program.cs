@@ -28,15 +28,21 @@ class Program
                 {
                     case "1":
                         // Breathing Activity
+                        Breathing breathing = new Breathing();
+                        breathing.ImRun();
                         break;
                     case "2":
                         // Listing Activity
+                        Listing listing = new Listing();
+                        listing.ImRun();
                         break;
                     case "3":
                         // Reflecting Activity
+                        Reflecting reflecting = new Reflecting();
+                        reflecting.ImRun();
                         break;
                     case "4":
-                        // Quit
+                        // Quit (Exits the while loop)
                         break;
                     default:
                         //Catches all else
