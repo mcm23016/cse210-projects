@@ -1,4 +1,4 @@
-public class Aayush : Entity
+public class Aayush : Player
 {
     // Class Constructors
     public Aayush() : base()
@@ -10,15 +10,18 @@ public class Aayush : Entity
         _imSpeedStat = 2;
         _imArmorStat = 5;
         _imGold = 30;
-        // _imActions = new List<Action> { new BigAttack() }; 
+        _imActions = new List<Action> {new WeaponlessAttack(), new UseItem()}; 
     }
 
     // Class Methods
     public override void _ImLevelUp()
     {
+        //Gain a level
+
+        //Update Stats
         if (_imLevel == 1)
         {
-            _imName = "Knight";
+            _imName = "Aayush 2.0";
             _imLevel = 2;
             _imHealth = 40;
             _imStrengthStat = 8;
@@ -28,7 +31,7 @@ public class Aayush : Entity
         }
         else if (_imLevel == 2)
         {
-            _imName = "Champion";
+            _imName = "Ultimate Aayush";
             _imLevel = 3;
             _imHealth = 60;
             _imStrengthStat = 12;
@@ -40,6 +43,16 @@ public class Aayush : Entity
 
     public override void bmTakeAction(Entity user, List<Player> imParty, List<Entity> targets)
     {
-        Console.WriteLine("Aayush takes action.");
+        Console.WriteLine($"The {_imName} takes action.");
+        // Display players actions
+        Out.bmDisplayActions(_imActions);
+        // Get users input
+        int ui = In.bmGetUserInput(_imActions.Count()) - 1;
+        //Set user
+        _imActions[ui].SetUser(user, imParty);
+        // Set target
+        _imActions[ui].SetTarget(targets, imParty);
+        // Call that action effect
+        _imActions[ui].Effect();
     }
 }

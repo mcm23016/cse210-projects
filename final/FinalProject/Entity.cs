@@ -56,6 +56,11 @@ public abstract class Entity
 
     public void _ImTakeDamage(int damage)
     {
+        damage = damage - _imArmorStat;
+        if(damage < 1)
+        {
+            damage = 1;
+        }
         _imHealth = _imHealth - damage;
     }
 
