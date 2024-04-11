@@ -13,6 +13,7 @@ public class Player : Entity
         _imName = "Nonspecific Player";
         _inventory = new List<Item>();
         _weapon = "Fists"; // Default weapon
+        // _imSpeedStat = 100; //Make the player fast!!!!
         _imActions = new List<Action> {new WeaponlessAttack(), new UseItem()};
         _imGold = 30;
     }
