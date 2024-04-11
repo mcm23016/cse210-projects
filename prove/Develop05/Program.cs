@@ -160,7 +160,7 @@ class Program
                 else if (parts[0] == "Checklist")
                 {
                     // Builds a Checklist goal and adds it to goal list
-                    imGoals.Add(new ChecklistGoal(parts[2], parts[3], parts[4], int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7])));
+                    imGoals.Add(new ChecklistGoal(parts[2], parts[3], parts[4], int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7]), int.Parse(parts[8])));
                 }
             }
         

@@ -14,7 +14,7 @@ public class ChecklistGoal : Goal
         _imCompleteOutOf = completeOutOf;
         _imBonusPointValue = bonusPoints;
     }
-        public ChecklistGoal(string name, string description, string isComplete, int completeOutOf, int points, int bonusPoints) : base(name, description, points) 
+        public ChecklistGoal(string name, string description, string isComplete, int complete, int completeOutOf, int points, int bonusPoints) : base(name, description, points) 
     {
         if (isComplete == "true")
         {
@@ -24,7 +24,7 @@ public class ChecklistGoal : Goal
         {
             _imIsComplete = false;    
         }
-        _imComplete = 0;
+        _imComplete = complete;
         _imCompleteOutOf = completeOutOf;
         _imBonusPointValue = bonusPoints;
     }
@@ -44,7 +44,7 @@ public class ChecklistGoal : Goal
     public override string ImToCSV()
     {
         //Class type~~PointsEarned~~Name~~Description~~Completed(Bool)~~Completed(int)~~CompletedOutOf(int)~~PointValues~~BonusPointValue
-        return $"Checklist~~ ~~{_imName}~~{_imDescription}~~{_imIsComplete}~~{_imComplete}~~{_imCompleteOutOf}~~{_imPoints}~~ ";
+        return $"Checklist~~ ~~{_imName}~~{_imDescription}~~{_imIsComplete}~~{_imComplete}~~{_imCompleteOutOf}~~{_imPoints}~~{_imBonusPointValue}";
     }
     public override int ImComplete()
     {
