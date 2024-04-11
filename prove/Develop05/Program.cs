@@ -18,13 +18,14 @@ class Program
             // Creates new goals from user input
             string imUserInput = "";
 
-            while(imUserInput != "1" && imUserInput != "2" && imUserInput != "3")
+            while(imUserInput != "1" && imUserInput != "2" && imUserInput != "3" && imUserInput != "4")
             {
                 // Print options
                 Console.WriteLine("The types of goals are :");
                 Console.WriteLine("1. Simple Goal");
                 Console.WriteLine("2. Eternal Goal");
                 Console.WriteLine("3. Checklist Goal");
+                Console.WriteLine("4. Negative Goal");
 
                 // Get user choice
                 Console.Write("What kind of goal do you want to make? ");
@@ -87,21 +88,48 @@ class Program
                         imGoals.Add(new ChecklistGoal(name, description, completeAmount, points, bonusPoints));
                         break;
 
+                    case "4":
+                        // Negative Goal
+                        
+                        Console.Write("What is the name of this goal: ");
+                        name = Console.ReadLine();
+
+                        Console.Write("Write a short description of the goal: ");
+                        description = Console.ReadLine();
+
+                        Console.Write("How many points will you lose if you break this goal: ");
+                        points = (-1) * int.Parse(Console.ReadLine());
+                        
+                        
+                        imGoals.Add(new EternalGoal(name, description, points));
+                        break;
+
                     default:
                         // Catches everything else.
-                        Console.WriteLine("Error: Enter a number 1-3.");
+                        Console.WriteLine("Error: Enter a number 1-4.");
                         break;
                 }
             }
         }
 
-        void ImListGoals()
+        void ImListGoals(bool flag = true)
         {
             // Foreach goal in goal list, list it out
             int i = 1;
             foreach(Goal goal in imGoals)
             {
+                // If flag is set false it will only show non completed goals
+                if (flag)
+                {
                 Console.WriteLine($"{i}.{goal.ImToString()}");
+                }
+                else
+                {
+                    if (goal.ImIsComplete() != true)
+                    {
+                        Console.WriteLine($"{i}.{goal.ImToString()}");
+                    }
+                }
                 i ++;
             }
         }
@@ -162,6 +190,11 @@ class Program
                     // Builds a Checklist goal and adds it to goal list
                     imGoals.Add(new ChecklistGoal(parts[2], parts[3], parts[4], int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7]), int.Parse(parts[8])));
                 }
+                else if (parts[0] == "Negative")
+                {
+                    // Builds a Negative goal and adds it to goal list
+                    imGoals.Add(new NegativeGoal(parts[2], parts[3], int.Parse(parts[7])));
+                }
             }
         
         }
@@ -169,7 +202,7 @@ class Program
         void ImRecordEvent()
         {
             // List out goals and allow user to complete one.
-            ImListGoals();
+            ImListGoals(false);
 
             Console.Write("Which goal did you complete? ");
             int goalNumber = int.Parse(Console.ReadLine()) - 1;
